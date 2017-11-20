@@ -1,1 +1,22 @@
-cadastrar
+<form class="row" (submit)="cadastrar()">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Título</label>
+            <input class="form-control" autocomplete="off" [(ngModel)]="foto.titulo" name="titulo">
+        </div>
+        <div class="form-group">
+            <label>URL</label>
+            <input class="form-control" autocomplete="off" [(ngModel)]="foto.url" name="url">
+        </div>
+        <div class="form-group">
+            <label>Descrição</label>
+            <textarea class="form-control" autocomplete="off" [(ngModel)]="foto.descricao" name="descricao"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Salvar
+        </button>
+        <a [routerLink]="['']" class="btn btn-primary">Voltar</a>
+        <hr>
+    </div>
+</form>

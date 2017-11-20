@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 // modulos
 import { HttpModule } from '@angular/http'
@@ -24,6 +25,7 @@ import { CadastroComponent } from './cadastro/cadastro.component';
         FotoModule,
         PainelModule,
         routing,
+        FormsModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
