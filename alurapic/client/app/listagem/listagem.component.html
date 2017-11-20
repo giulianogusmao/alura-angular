@@ -1,5 +1,21 @@
 <div class="row">
-    <painel *ngFor="let foto of fotos" [titulo]="foto.titulo" class="col-md-2">
+    <div class="col-md-12">
+
+        <form>
+            <div class="input-group">
+                <input #textoProcurado (keyup)="0" class="form-control" placeholder="filtrar pelo título da foto">
+                <span class="input-group-btn">
+                    <a routerLink="/cadastro" class="btn btn-primary">Nova foto</a>
+                </span>
+            </div>
+        </form>
+
+    </div>
+</div>
+<br>
+
+<div class="row">
+    <painel *ngFor="let foto of fotos | filtroPorTitulo: textoProcurado.value" [titulo]="foto.titulo | uppercase" class="col-sm-2">
         <foto [titulo]="foto.titulo" [url]="foto.url">
         </foto>
     </painel>
