@@ -7,12 +7,16 @@ export class CadastroService {
 
     constructor(
         private _http: Http
-    ) {        
+    ) {
     }
 
     add(foto: FotoComponent) {
         let headers = new Headers();
         headers.set('content-type', 'application/json');
         return this._http.post('v1/fotos', JSON.stringify(foto), { headers: headers });
+    }
+
+    remover(foto: FotoComponent) {
+
     }
 }
