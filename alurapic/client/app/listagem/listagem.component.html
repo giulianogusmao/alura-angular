@@ -14,10 +14,13 @@
 </div>
 <br>
 
+<p class="alert alert-info" *ngIf="mensagem?.length">{{ mensagem }}</p>
+
 <div class="row">
-    <painel *ngFor="let foto of fotos | filtroPorTitulo: textoProcurado.value" [titulo]="foto.titulo | uppercase" class="col-sm-2">
-        <foto [titulo]="foto.titulo" [url]="foto.url">
-        </foto>
+    <painel *ngFor="let foto of fotos | filtroPorTitulo: textoProcurado.value; trackBy: trackByFnFoto" [titulo]="foto.titulo | uppercase"
+        class="col-sm-2">
+        <foto [titulo]="foto.titulo" [url]="foto.url"></foto>
+        <button class="btn btn-danger btn-block" (click)="remover(foto)">Remover</button>
     </painel>
 </div>
 <!-- fim row -->
