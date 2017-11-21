@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { FotoService } from './../foto/foto.service';
 import { FotoComponent } from './../foto/foto.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     moduleId: module.id,
@@ -16,10 +17,13 @@ export class CadastroComponent implements OnDestroy {
     form: FormGroup;
     foto: FotoComponent = new FotoComponent();
     private _inscricao: Subscription;
+    private _inscricaoRoute: Subscription;
 
     constructor(
         private _fotoService: FotoService,
-        private _fb: FormBuilder
+        private _fb: FormBuilder,
+        private _route: ActivatedRoute,
+        private _router: Router
     ) {
         this.form = this._fb.group({
             titulo: ['', Validators.compose([
@@ -29,6 +33,21 @@ export class CadastroComponent implements OnDestroy {
             url: ['', Validators.required],
             descricao: [''],
         });
+
+        this._inscricaoRoute = this._route.params
+            .subscribe(
+                paramns => {
+                    const id = paramns['id'];
+                    if (id) {
+                        this._fotoService
+                            .getFotoById(id)
+                            .subscribe(
+                                foto => this.foto = foto,
+                                err => console.error(err)
+                            );
+                    }
+                }
+            );
     }
 
     cadastrar() {
@@ -36,9 +55,13 @@ export class CadastroComponent implements OnDestroy {
             this._inscricao = this._fotoService
                 .add(this.foto)
                 .subscribe(
-                    () => {
+                    mensagem => {
                         console.log('foto salva com sucesso');
-                        this.foto = new FotoComponent();
+                        if (mensagem.inclusao) {
+                            this.foto = new FotoComponent();
+                        } else {
+                            this._router.navigate(['']);
+                        }
                     },
                     err => console.error(err)
                 );
@@ -49,6 +72,7 @@ export class CadastroComponent implements OnDestroy {
 
     ngOnDestroy() {
         try {
+            this._inscricaoRoute.unsubscribe();
             this._inscricao.unsubscribe();
         } catch (e) { }
     }

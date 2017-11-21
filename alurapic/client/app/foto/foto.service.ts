@@ -2,6 +2,7 @@ import { FotoComponent } from './foto.component';
 import { Http, Headers, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Mensagem } from './mensagem';
 
 @Injectable()
 export class FotoService {
@@ -23,9 +24,27 @@ export class FotoService {
             .map(res => this._lista = res.json());
     }
 
-    add(foto: FotoComponent): Observable<Response> {
-        return this._http
-            .post(this._url, JSON.stringify(foto), { headers: this._headers });
+    getFotoById(id: string): Observable<FotoComponent> {
+        return this.getLista()
+            .map(fotos => {
+                try {
+                return fotos.filter(foto => foto._id == id)[0];
+                } catch (e) {
+                    throw new Error('Nenhuma foto encontrada');
+                }
+            });
+    }
+
+    add(foto: FotoComponent): Observable<Mensagem> {
+        if (foto._id) {
+            return this._http // altera foto cadastrada
+                .put(`${this._url}/${foto._id}`, JSON.stringify(foto), { headers: this._headers })
+                .map(() => new Mensagem('Foto alterada com sucesso'));
+            }
+            
+            return this._http // inclui nova foto
+                .post(this._url, JSON.stringify(foto), { headers: this._headers })
+                .map(() => new Mensagem('Foto inclída com sucesso', true));
     }
 
     remover(foto: FotoComponent): Observable<Response> {
