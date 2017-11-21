@@ -1,6 +1,18 @@
+<nav class="navbar navbar-default">
+    <ul class="nav navbar-nav">
+        <li>
+            <a [routerLink]="['']">Home</a>
+        </li>
+        <li>
+            <a [routerLink]="['/cadastro']">Nova</a>
+        </li>
+    </ul>
+</nav>
+
 <div class="jumbotron">
     <h1 class="text-center">Alurapic</h1>
 </div>
+
 <div class="container">
     <router-outlet></router-outlet>
 </div>
