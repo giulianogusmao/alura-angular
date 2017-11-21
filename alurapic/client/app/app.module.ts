@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 
 // modulos
 import { HttpModule } from '@angular/http'
+import { SharedModule } from './shared/shared.module';
 import { FotoModule } from './foto/foto.module';
 import { PainelModule } from './painel/painel.module';
 import { routing } from './app.router.module';
@@ -24,11 +25,12 @@ import { CadastroComponent } from './cadastro/cadastro.component';
     imports: [
         BrowserModule,
         HttpModule,
+        ReactiveFormsModule,
+        SharedModule,
         FotoModule,
         PainelModule,
-        routing,
         FormsModule,
-        ReactiveFormsModule
+        routing,
     ],
     providers: [],
     bootstrap: [AppComponent]
