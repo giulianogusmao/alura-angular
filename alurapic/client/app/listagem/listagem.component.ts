@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Http } from '@angular/http';
 
-import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs/Subscription';
+import { FotoService } from './../foto/foto.service';
 
 @Component({
     moduleId: module.id,
@@ -15,14 +15,14 @@ export class ListagemComponent implements OnDestroy {
     private _incricao: Subscription;
 
     constructor(
-        private _http: Http
+        private _http: Http,
+        private _fotoService: FotoService
     ) {
-        this._incricao = this._http
-            .get('v1/fotos')
-            .map(res => res.json())
+        this._incricao = this._fotoService
+            .getLista()
             .subscribe(
-            fotos => this.fotos = fotos,
-            err => console.error(err)
+                fotos => this.fotos = fotos,
+                err => console.error(err)
             );
     }
 

@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import 'rxjs/add/operator/map';
+
 // modulos
 import { HttpModule } from '@angular/http'
 import { FotoModule } from './foto/foto.module';

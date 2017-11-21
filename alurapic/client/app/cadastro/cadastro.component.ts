@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 
-import { CadastroService } from './cadastro.service';
+import { FotoService } from './../foto/foto.service';
 import { FotoComponent } from './../foto/foto.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -10,7 +10,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
     moduleId: module.id,
     selector: 'cadastro',
     templateUrl: './cadastro.component.html',
-    providers: [CadastroService],
 })
 export class CadastroComponent implements OnDestroy {
 
@@ -19,7 +18,7 @@ export class CadastroComponent implements OnDestroy {
     private _inscricao: Subscription;
 
     constructor(
-        private _cadastroService: CadastroService,
+        private _fotoService: FotoService,
         private _fb: FormBuilder
     ) {
         this.form = this._fb.group({
@@ -34,7 +33,7 @@ export class CadastroComponent implements OnDestroy {
 
     cadastrar() {
         if(this.form.valid) {
-            this._inscricao = this._cadastroService
+            this._inscricao = this._fotoService
                 .add(this.foto)
                 .subscribe(
                     () => {
