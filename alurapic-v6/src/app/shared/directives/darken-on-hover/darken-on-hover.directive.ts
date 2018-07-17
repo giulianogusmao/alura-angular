@@ -14,6 +14,11 @@ export class DarkenOnHoverDirective {
 
   @HostListener('mouseover')
   darkenOn() {
+    /**
+     * o elemento não será manipulado diretamente, pois se o código for executado no servidor
+     * o código não vai funcionar, por isso vamos manipular o elemento atraves do render.setElement
+     */
+    // this.el.nativeElement
     this.render.setElementStyle(this.el.nativeElement, 'filter', `brightness(${this.brightness})`);
   }
 
