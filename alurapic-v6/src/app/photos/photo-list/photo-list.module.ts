@@ -3,6 +3,7 @@ import { CommonModule } from '../../../../node_modules/@angular/common';
 
 import { PhotoModule } from '../photo/photo.module';
 import { CardModule } from '../../shared/components/card/card.module';
+import { DarkenOnHoverModule } from '../../shared/directives/darken-on-hover/darken-on-hover.module';
 
 import { PhotoListComponent } from './photo-list.component';
 import { PhotosComponent } from './photos/photos.component';
@@ -21,7 +22,8 @@ import { SearchComponent } from './search/search.component';
   imports: [
     CommonModule,
     PhotoModule,
-    CardModule
+    CardModule,
+    DarkenOnHoverModule,
   ],
 })
 export class PhotoListModule { }
