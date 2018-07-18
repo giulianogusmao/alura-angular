@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../core/auth/auth.service';
+import { PlatformDetectorService } from '../../core/platform-detector/platform-detector.service';
 
 @Component({
   templateUrl: './signin.component.html',
@@ -17,6 +18,7 @@ export class SigninComponent implements OnInit {
     private _fb: FormBuilder,
     private _authService: AuthService,
     private _router: Router,
+    private _platformDetectorService: PlatformDetectorService
   ) { }
 
   ngOnInit() {
@@ -39,6 +41,7 @@ export class SigninComponent implements OnInit {
         (err) => {
           console.error(err);
           this.loginForm.reset();
+          this._platformDetectorService.isPlatformBrowser() && this.usernameInput.nativeElement.focus();
 
           try {
             this.msg = err.error.message;
