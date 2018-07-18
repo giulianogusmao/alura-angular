@@ -26,8 +26,6 @@ export class SigninComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-
-    console.log(this.loginForm.get('username'))
   }
 
   login() {
@@ -53,6 +51,6 @@ export class SigninComponent implements OnInit {
             }, 5000);
           }
         }
-      )
+      );
   }
 }
