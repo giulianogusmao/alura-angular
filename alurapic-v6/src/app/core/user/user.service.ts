@@ -12,6 +12,7 @@ import { User } from './user';
 export class UserService {
 
   userObs = new BehaviorSubject<User>(null);
+  username: string;
 
   constructor(
     private _tokenService: TokenService
@@ -33,11 +34,20 @@ export class UserService {
   decodeAndNotify(): void {
     const token = this._tokenService.token;
     const user = jwt_decode(token) as User;
+    this.username = user.name;
     this.userObs.next(user);
   }
 
   logout() {
     this._tokenService.remove();
     this.userObs.next(null);
+  }
+
+  isLogged() {
+    return this._tokenService.hasToken();
+  }
+
+  getUserName(): string {
+    return this.username;
   }
 }
