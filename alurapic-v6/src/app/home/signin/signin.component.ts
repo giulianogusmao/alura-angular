@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../core/auth.service';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   templateUrl: './signin.component.html',
@@ -11,11 +11,12 @@ export class SigninComponent implements OnInit {
 
   loginForm: FormGroup;
   msg: string;
+  @ViewChild('usernameInput') usernameInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private _fb: FormBuilder,
     private _authService: AuthService,
-    private _router: Router
+    private _router: Router,
   ) { }
 
   ngOnInit() {

@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from '@angular/common/http';
+
 import { Photo } from "./photo";
+import { Helper } from '../../core/helper/helper';
 
 @Injectable({ providedIn: 'root' })
 export class PhotoService {
-  private _api = 'http://localhost:3000';
 
   constructor(
     private _http: HttpClient
@@ -12,7 +13,7 @@ export class PhotoService {
 
   listFromUser(username: string) {
     return this._http
-      .get<Photo[]>(`${this._api}/${username}/photos`);
+      .get<Photo[]>(`${Helper.api}/${username}/photos`);
   }
 
   listFromUserPaginated(username: string, page: number) {
@@ -20,6 +21,6 @@ export class PhotoService {
       .append('page', page.toString());
 
     return this._http
-      .get<Photo[]>(`${this._api}/${username}/photos`, { params });
+      .get<Photo[]>(`${Helper.api}/${username}/photos`, { params });
   }
 }
