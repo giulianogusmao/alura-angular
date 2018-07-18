@@ -35,4 +35,9 @@ export class UserService {
     const user = jwt_decode(token) as User;
     this.userObs.next(user);
   }
+
+  logout() {
+    this._tokenService.remove();
+    this.userObs.next(null);
+  }
 }
