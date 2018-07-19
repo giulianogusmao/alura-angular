@@ -9,7 +9,8 @@ import { SignupService } from './signup.service';
 import { PlatformDetectorService } from '../../core/platform-detector/platform-detector.service';
 
 @Component({
-  templateUrl: './signup.component.html'
+  templateUrl: './signup.component.html',
+  providers: [UserNotTakenValidatorService]
 })
 export class SignupComponent implements OnInit {
 

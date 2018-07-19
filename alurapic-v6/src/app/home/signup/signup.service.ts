@@ -4,9 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Helper } from '../../core/helper/helper';
 import { NewUser } from './newUser';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SignupService {
 
   constructor(
