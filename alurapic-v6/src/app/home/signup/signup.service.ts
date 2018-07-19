@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Helper } from '../../core/helper/helper';
+import { NewUser } from './newUser';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,10 @@ export class SignupService {
    */
   checkUserNameTaken(userName: string) {
     return this._http.get(`${Helper.api}/user/exists/${userName}`)
+  }
+
+  signup(newUser: NewUser) {
+    return this._http
+      .post(`${Helper.api}/user/signup`, newUser);
   }
 }
