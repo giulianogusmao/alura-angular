@@ -1,13 +1,14 @@
-<div class="text-center mt-3 mb-3">
-    <form>
-        <i aria-hidden="true" class="fa fa-search mr-1"></i>
-        <input
-            class="rounded"
-            type="search"
-            placeholder="search..."
-            autofocus
-            (keyup)="debounce.next($event.target.value)"
-            [value]="value"
-            >
-    </form>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-search"><i aria-hidden="true" class="fa fa-search mr-1"></i></span>
+  </div>
+  <input
+    class="form-control"
+    aria-label="search..."
+    aria-describedby="basic-search"
+    type="search"
+    placeholder="search..."
+    autofocus
+    (keyup)="debounce.next($event.target.value)"
+    [value]="value">
 </div>
