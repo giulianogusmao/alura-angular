@@ -27,8 +27,6 @@ export class SigninComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    console.log(this.loginForm);
-
     // focus campo login
     this._platformDetectorService.isPlatformBrowser() && this.firstInput.nativeElement.focus();
   }

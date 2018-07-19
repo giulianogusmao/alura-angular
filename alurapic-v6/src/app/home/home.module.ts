@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { VMessageModule } from '../shared/components/vmessage/vmessage.module';
 import { ValertModule } from '../shared/components/valert/valert.module';
+import { HomeRoutingModule } from './home.routing.module';
 
 import { HomeComponent } from './home.component';
 import { SigninComponent } from './signin/signin.component';
@@ -17,6 +18,7 @@ import { SignupComponent } from './signup/signup.component';
     VMessageModule,
     ValertModule,
     RouterModule,
+    HomeRoutingModule
   ],
   declarations: [
     HomeComponent,
