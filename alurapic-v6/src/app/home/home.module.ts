@@ -7,6 +7,7 @@ import { VMessageModule } from '../shared/components/vmessage/vmessage.module';
 import { ValertModule } from '../shared/components/valert/valert.module';
 
 import { SigninComponent } from './signin/signin.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { SigninComponent } from './signin/signin.component';
   ],
   declarations: [
     SigninComponent,
+    SignupComponent,
   ]
 })
 export class HomeModule { }

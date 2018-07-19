@@ -11,16 +11,16 @@ export class PhotoService {
     private _http: HttpClient
   ) { }
 
-  listFromUser(username: string) {
+  listFromUser(userName: string) {
     return this._http
-      .get<Photo[]>(`${Helper.api}/${username}/photos`);
+      .get<Photo[]>(`${Helper.api}/${userName}/photos`);
   }
 
-  listFromUserPaginated(username: string, page: number) {
+  listFromUserPaginated(userName: string, page: number) {
     const params = new HttpParams()
       .append('page', page.toString());
 
     return this._http
-      .get<Photo[]>(`${Helper.api}/${username}/photos`, { params });
+      .get<Photo[]>(`${Helper.api}/${userName}/photos`, { params });
   }
 }

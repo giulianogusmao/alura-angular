@@ -13,7 +13,7 @@ export class PhotoListComponent implements OnInit {
   filter = '';
   hasMore: boolean = true;
   currentPage: number = 1;
-  username: string = '';
+  userName: string = '';
 
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -21,13 +21,13 @@ export class PhotoListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.username = this._activatedRoute.snapshot.params.username;
+    this.userName = this._activatedRoute.snapshot.params.userName;
     this.photos = this._activatedRoute.snapshot.data['photos'];
   }
 
   load() {
     this._photoService
-      .listFromUserPaginated(this.username, ++this.currentPage)
+      .listFromUserPaginated(this.userName, ++this.currentPage)
       .subscribe(photos => {
         this.filter = '';
         this.photos = this.photos.concat(photos);

@@ -12,7 +12,7 @@ export class SigninComponent implements OnInit {
 
   loginForm: FormGroup;
   msg: string;
-  @ViewChild('usernameInput') usernameInput: ElementRef<HTMLInputElement>;
+  @ViewChild('userNameInput') userNameInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private _fb: FormBuilder,
@@ -23,23 +23,23 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this._fb.group({
-      username: ['', Validators.required],
+      userName: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
   login() {
-    const username = this.loginForm.get('username').value;
+    const userName = this.loginForm.get('userName').value;
     const password = this.loginForm.get('password').value;
 
     this._authService
-      .authenticate(username, password)
+      .authenticate(userName, password)
       .subscribe(
-        () => this._router.navigate(['user', username]),
+        () => this._router.navigate(['user', userName]),
         (err) => {
           console.error(err);
           this.loginForm.reset();
-          this._platformDetectorService.isPlatformBrowser() && this.usernameInput.nativeElement.focus();
+          this._platformDetectorService.isPlatformBrowser() && this.userNameInput.nativeElement.focus();
 
           try {
             this.msg = err.error.message;

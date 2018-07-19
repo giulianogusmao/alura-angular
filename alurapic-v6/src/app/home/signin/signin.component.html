@@ -9,9 +9,9 @@
     </app-valert>
 
     <div class="form-group">
-      <input type="text" formControlName="username" #usernameInput class="form-control" placeholder="User name" autofocus>
+      <input type="text" formControlName="userName" #userNameInput class="form-control" placeholder="User name" autofocus>
 
-      <app-vmessage *ngIf="loginForm.get('username').errors?.required && loginForm.get('username').touched">
+      <app-vmessage *ngIf="loginForm.get('userName').errors?.required && loginForm.get('userName').touched">
         User name is required!
       </app-vmessage>
     </div>
@@ -29,7 +29,7 @@
 
   <p>
     Not a user?
-    <a href="#">Register now</a>
+    <a [routerLink]="['signup']">Register now</a>
   </p>
 
 </div>
