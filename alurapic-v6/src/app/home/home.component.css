@@ -1,0 +1,13 @@
+.main {
+  position: fixed;
+  overflow: auto;
+}
+
+.main, .row {
+  height: 100%;
+}
+
+.bg-img {
+  background: url('/assets/images/img-home.jpg') center center no-repeat;
+  background-size: auto 100%;
+}

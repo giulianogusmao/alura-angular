@@ -12,7 +12,7 @@ export class SigninComponent implements OnInit {
 
   loginForm: FormGroup;
   msg: string;
-  @ViewChild('userNameInput') userNameInput: ElementRef<HTMLInputElement>;
+  @ViewChild('firstInput') firstInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private _fb: FormBuilder,
@@ -26,6 +26,11 @@ export class SigninComponent implements OnInit {
       userName: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    console.log(this.loginForm);
+
+    // focus campo login
+    this._platformDetectorService.isPlatformBrowser() && this.firstInput.nativeElement.focus();
   }
 
   login() {
@@ -39,7 +44,7 @@ export class SigninComponent implements OnInit {
         (err) => {
           console.error(err);
           this.loginForm.reset();
-          this._platformDetectorService.isPlatformBrowser() && this.userNameInput.nativeElement.focus();
+          this._platformDetectorService.isPlatformBrowser() && this.firstInput.nativeElement.focus();
 
           try {
             this.msg = err.error.message;

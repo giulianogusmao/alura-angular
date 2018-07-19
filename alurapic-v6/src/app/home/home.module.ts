@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { VMessageModule } from '../shared/components/vmessage/vmessage.module';
 import { ValertModule } from '../shared/components/valert/valert.module';
 
+import { HomeComponent } from './home.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 
@@ -18,6 +19,7 @@ import { SignupComponent } from './signup/signup.component';
     RouterModule,
   ],
   declarations: [
+    HomeComponent,
     SigninComponent,
     SignupComponent,
   ]
