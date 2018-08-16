@@ -1,3 +1,44 @@
-<p>
-  photo-form works!
-</p>
+<div class="container">
+  <form [formGroup]="photoForm" class="row" (submit)="upload()">
+    <div class="col-md-6 text-center">
+      <input #fileinput type="file" hidden accept="image/*" formControlName="file" (change)="handleFile($event.target.files[0])">
+
+      <div *ngIf="!preview; else previewImg">
+        <button type="button" class="btn btn-primary" (click)="fileinput.click()">Selecionar foto</button>
+
+        <app-vmessage *ngIf="photoForm.get('file').errors?.required">
+          Please, select a photo!
+        </app-vmessage>
+      </div>
+
+      <ng-template #previewImg>
+        <div (click)="fileinput.click()" style="cursor: pointer">
+          <ap-photo [url]="preview" [description]="photoForm.get('description').value"></ap-photo>
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="col-md">
+      <div class="form-group">
+        <textarea formControlName="description" class="form-control form-control-sm" placeholder="photo description"></textarea>
+
+        <app-vmessage *ngIf="photoForm.get('description').errors?.maxlength">
+          Description has over 300 characters
+        </app-vmessage>
+      </div>
+
+      <div class="form-group">
+        <label class="text-muted">
+          Allow comments
+          <input formControlName="allow" type="checkbox">
+        </label>
+      </div>
+
+      <button [disabled]="photoForm.invalid" type="submit" class="btn btn-primary btn-block">
+        Upload
+      </button>
+
+      <a class="btn btn-secondary text-white btn-block">Cancel</a>
+    </div>
+  </form>
+</div>
