@@ -1,10 +1,10 @@
 <div class="container">
   <form [formGroup]="photoForm" class="row" (submit)="upload()">
-    <div class="col-md-6 text-center">
+    <div class="col-md-6 text-center mb-3">
       <input #fileinput type="file" hidden accept="image/*" formControlName="file" (change)="handleFile($event.target.files[0])">
 
       <div *ngIf="!preview; else previewImg">
-        <button type="button" class="btn btn-primary" (click)="fileinput.click()">Selecionar foto</button>
+        <button type="button" class="btn btn-primary" immediateClick (click)="fileinput.click()">Selecionar foto</button>
 
         <app-vmessage *ngIf="photoForm.get('file').errors?.required">
           Please, select a photo!
