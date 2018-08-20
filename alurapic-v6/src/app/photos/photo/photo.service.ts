@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Photo } from "./photo";
 import { Helper } from '../../core/helper/helper';
+import { PhotoCommment } from "./photo-comment";
 
 @Injectable({ providedIn: 'root' })
 export class PhotoService {
@@ -35,7 +36,15 @@ export class PhotoService {
     return this._http.post(`${Helper.api}/photos/upload`, formData);
   }
 
-  findById(id: string) {
-    return this._http.get<Photo>(`${Helper.api}/photos/${id}`);
+  findById(photoId: string) {
+    return this._http.get<Photo>(`${Helper.api}/photos/${photoId}`);
+  }
+
+  getComments(photoId: string) {
+    return this._http.get<PhotoCommment[]>(`${Helper.api}/photos/${photoId}/comments`);
+  }
+
+  addComment(photoId: string, commentText: string) {
+    return this._http.post(`${Helper.api}/photos/${photoId}/comments`, { commentText });
   }
 }
