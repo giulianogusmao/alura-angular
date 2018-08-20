@@ -14,7 +14,7 @@ export class PhotoComponent {
   @Input() description = '';
 
   @Input() set url(url: string) {
-    this._url = url.startsWith('data') ? url : PATH + url;
+    this._url = (url || '').startsWith('data') ? url : PATH + url;
   }
 
   get url() {

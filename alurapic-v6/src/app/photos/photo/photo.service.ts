@@ -34,4 +34,8 @@ export class PhotoService {
 
     return this._http.post(`${Helper.api}/photos/upload`, formData);
   }
+
+  findById(id: string) {
+    return this._http.get<Photo>(`${Helper.api}/photos/${id}`);
+  }
 }
