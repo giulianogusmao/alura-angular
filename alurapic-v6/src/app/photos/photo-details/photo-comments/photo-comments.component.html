@@ -5,9 +5,11 @@
         {{ comment.userName }}
       </a>
 
-      <em>
-        {{ comment.date | date:'dd/MM/yy HH:mm' }}
-      </em>
+      <small>
+        <em>
+          {{ comment.date | date:'dd/MM/yy HH:mm' }}
+        </em>
+      </small>
 
       <p class="breack-word mb-2">
         {{ comment.text }}

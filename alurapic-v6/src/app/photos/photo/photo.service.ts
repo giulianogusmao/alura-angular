@@ -36,6 +36,10 @@ export class PhotoService {
     return this._http.post(`${Helper.api}/photos/upload`, formData);
   }
 
+  removePhoto(photoId: string) {
+    return this._http.delete(`${Helper.api}/photos/${photoId}`);
+  }
+
   findById(photoId: string) {
     return this._http.get<Photo>(`${Helper.api}/photos/${photoId}`);
   }
