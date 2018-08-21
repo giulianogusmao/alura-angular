@@ -17,7 +17,7 @@
     </li>
   </ul>
 
-  <div class="mt-4">
+  <div showIfLogged class="mt-4">
     <form [formGroup]="commentForm" (submit)="save()">
       <div class="input-group">
         <textarea class="form-control" formControlName="comment"></textarea>

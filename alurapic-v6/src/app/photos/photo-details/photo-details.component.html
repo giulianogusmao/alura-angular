@@ -9,7 +9,16 @@
       <small>
         <p class="text-left break-word">{{ photo.description }}</p>
         <div class="text-left mb-4">
+
+          <span showIfLogged>
+            <button class="btn btn-sm btn-light rounded-circle">
+              <i class="fa fa-heart-o fa-2x"></i>
+            </button>
+            {{ photo.likes }}
+          </span>
+
           <i class="fa fa-comment-o fa-2x mr-2 ml-2"></i>{{ photo.comments }}
+
           <button photoOwnerOnly [ownedPhoto]="photo" class="btn btn-sm pull-right btn-light rounded-circle">
             <i (click)="remove()" class="fa fa-trash-o fa-2x"></i>
           </button>
