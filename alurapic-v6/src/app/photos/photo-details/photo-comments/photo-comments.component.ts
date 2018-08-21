@@ -13,7 +13,7 @@ import { NotifyService } from "../../../shared/components/notify/notify.service"
 })
 export class PhotoCommentComponent implements OnInit {
 
-  @Input() photoId: string;
+  @Input() photoId: number;
   comments$: Observable<PhotoCommment[]>;
   commentForm: FormGroup;
 

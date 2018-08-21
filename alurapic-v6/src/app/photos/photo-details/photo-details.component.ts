@@ -14,7 +14,7 @@ import { UserService } from "../../core/user/user.service";
 export class PhotoDetailsComponent implements OnInit {
 
   photo$: Observable<Photo>;
-  photoId: string;
+  photoId: number;
 
   constructor(
     private _router: Router,
@@ -43,5 +43,19 @@ export class PhotoDetailsComponent implements OnInit {
       console.error(err);
       this._notifyService.danger('Could not delete the photo!');
     });
+  }
+
+  like(photo: Photo): void {
+    this._photoService
+      .like(photo.id)
+      .subscribe(liked => {
+        if (liked) {
+          this.photo$ = this._photoService.findById(photo.id);
+        } else {
+          this._notifyService.warning('Sorry, dislike is disabled!');
+        }
+      }, err => {
+        console.error(err);
+      });
   }
 }
