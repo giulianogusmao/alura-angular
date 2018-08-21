@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { switchMap, tap } from "rxjs/operators";
 
 import { PhotoService, PhotoCommment } from "../../photo";
+import { NotifyService } from "../../../shared/components/notify/notify.service";
 
 @Component({
   selector: 'app-photo-comments',
@@ -12,13 +13,14 @@ import { PhotoService, PhotoCommment } from "../../photo";
 })
 export class PhotoCommentComponent implements OnInit {
 
-  @Input() photoId: string;
+  @Input() photoId: number;
   comments$: Observable<PhotoCommment[]>;
   commentForm: FormGroup;
 
   constructor(
     private _photoService: PhotoService,
     private _fb: FormBuilder,
+    private _notifyService: NotifyService,
   ) { }
 
   ngOnInit(): void {
@@ -42,9 +44,15 @@ export class PhotoCommentComponent implements OnInit {
       .pipe(switchMap(() =>
         this._photoService.getComments(this.photoId)
       ))
-      .pipe(tap(() => {
-        this.commentForm.reset();
-        alert('comentário adicionado com sucesso!');
-      }));
+      .pipe(tap(
+        () => {
+          this.commentForm.reset();
+          this._notifyService.success('Comment pushed!');
+        },
+        err => {
+          console.error(err);
+          this._notifyService.danger('Error to publish comment');
+        }
+      ));
   }
 }

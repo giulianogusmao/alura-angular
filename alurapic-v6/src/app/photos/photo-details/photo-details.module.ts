@@ -4,6 +4,7 @@ import { RouterModule } from "@angular/router";
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { PhotoModule } from "../photo/photo.module";
+import { ShowIfLoggedModule } from "../../shared/directives/show-if-logged";
 
 import { PhotoDetailsComponent } from "./photo-details.component";
 import { PhotoCommentComponent } from "./photo-comments/photo-comments.component";
@@ -17,6 +18,7 @@ import { PhotoOwnerOnlyDirective } from "./photo-owner-only/photo-owner-only.dir
     ReactiveFormsModule,
     PhotoModule,
     VMessageModule,
+    ShowIfLoggedModule,
   ],
   declarations: [
     PhotoDetailsComponent,

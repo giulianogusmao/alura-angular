@@ -4,6 +4,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Photo } from "./photo";
 import { Helper } from '../../core/helper/helper';
 import { PhotoCommment } from "./photo-comment";
+import { map, catchError } from "rxjs/operators";
+import { of, throwError } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class PhotoService {
@@ -36,19 +38,37 @@ export class PhotoService {
     return this._http.post(`${Helper.api}/photos/upload`, formData);
   }
 
-  removePhoto(photoId: string) {
+  removePhoto(photoId: number) {
     return this._http.delete(`${Helper.api}/photos/${photoId}`);
   }
 
-  findById(photoId: string) {
+  findById(photoId: number) {
     return this._http.get<Photo>(`${Helper.api}/photos/${photoId}`);
   }
 
-  getComments(photoId: string) {
+  getComments(photoId: number) {
     return this._http.get<PhotoCommment[]>(`${Helper.api}/photos/${photoId}/comments`);
   }
 
-  addComment(photoId: string, commentText: string) {
+  addComment(photoId: number, commentText: string) {
     return this._http.post(`${Helper.api}/photos/${photoId}/comments`, { commentText });
+  }
+
+  like(photoId: number) {
+    /**
+     * A api deste curso não tem suporte a remoção de curtidas(dislike) em uma foto, por isso ela só
+     * retorna status 200(conseguiu submeter o like) ou status 304(foto já esteja curtida).
+     * Por isso precisamos verificar o status retornado pela api
+     * - Caso tenha dado tudo certo apenas retorna true para aplicação
+     * - Caso tenha um algum erro:
+     *    - verifica se é o 304 e converte para retornar um observable do tipo false
+     *    - senão deixa o erro da api passar para aplicação
+     */
+    return this._http
+      .post(`${Helper.api}/photos/${photoId}/like`, {}, { observe: 'response' })
+      .pipe(map(() => true))
+      .pipe(catchError(err => {
+        return err.status == '304' ? of(false) : throwError(err);
+      }));
   }
 }

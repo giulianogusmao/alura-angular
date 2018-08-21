@@ -1,3 +1,5 @@
+import { environment } from '../../../environments/environment';
+
 export class Helper {
 
   constructor() {
@@ -5,6 +7,6 @@ export class Helper {
   }
 
   static get api() {
-    return 'http://localhost:3000';
+    return environment.ApiUrl;
   }
 }
