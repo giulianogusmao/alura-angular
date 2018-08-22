@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { map, catchError } from "rxjs/operators";
+import { of, throwError } from "rxjs";
 
 import { Photo } from "./photo";
 import { Helper } from '../../core/helper/helper';
 import { PhotoCommment } from "./photo-comment";
-import { map, catchError } from "rxjs/operators";
-import { of, throwError } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class PhotoService {
@@ -35,7 +35,14 @@ export class PhotoService {
     formData.append('allowComments', allowComments ? 'true' : 'false'); // formdata só recebe strings, por isso a conversão
     formData.append('imageFile', file);
 
-    return this._http.post(`${Helper.api}/photos/upload`, formData);
+    return this._http.post(
+      `${Helper.api}/photos/upload`,
+      formData,
+      {
+        observe: 'events',
+        reportProgress: true,
+      }
+    );
   }
 
   removePhoto(photoId: number) {
