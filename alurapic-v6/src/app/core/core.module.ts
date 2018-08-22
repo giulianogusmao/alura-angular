@@ -8,12 +8,14 @@ import { NotifyModule } from '../shared/components/notify/notify.module';
 import { HeaderComponent } from './header/header/header.component';
 import { RequestInterceptor } from './auth/request.interceptor';
 import { FooterComponent } from './footer/footer.component';
+import { LoadingModule } from '../shared/components/loading';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     NotifyModule,
+    LoadingModule,
   ],
   declarations: [
     HeaderComponent,
