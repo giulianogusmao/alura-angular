@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { VMessageModule } from '../shared/components/vmessage/vmessage.module';
-import { ValertModule } from '../shared/components/valert/valert.module';
 import { HomeRoutingModule } from './home.routing.module';
 
 import { HomeComponent } from './home.component';
@@ -17,7 +16,6 @@ import { SignupService } from './signup/signup.service';
     CommonModule,
     ReactiveFormsModule,
     VMessageModule,
-    ValertModule,
     RouterModule,
     HomeRoutingModule
   ],

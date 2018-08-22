@@ -7,6 +7,7 @@ import { UserNotTakenValidatorService } from './user-not-taken.validator.service
 import { NewUser } from './newUser';
 import { SignupService } from './signup.service';
 import { PlatformDetectorService } from '../../core/platform-detector/platform-detector.service';
+import { NotifyService } from '../../shared/components/notify/notify.service';
 
 @Component({
   templateUrl: './signup.component.html',
@@ -23,6 +24,7 @@ export class SignupComponent implements OnInit {
     private _signupService: SignupService,
     private _router: Router,
     private _platformDetectorService: PlatformDetectorService,
+    private _notifyService: NotifyService,
   ) {}
 
   ngOnInit(): void {
@@ -65,7 +67,10 @@ export class SignupComponent implements OnInit {
     this._signupService
       .signup(newUser)
       .subscribe(
-        () => this._router.navigate(['']),
+        () => {
+          this._router.navigate([''])
+          this._notifyService.success('User register!', true);
+        },
         console.error
       );
   }

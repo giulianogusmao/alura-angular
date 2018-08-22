@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../core/auth/auth.service';
 import { PlatformDetectorService } from '../../core/platform-detector/platform-detector.service';
+import { NotifyService } from '../../shared/components/notify/notify.service';
 
 @Component({
   templateUrl: './signin.component.html',
@@ -11,14 +12,14 @@ import { PlatformDetectorService } from '../../core/platform-detector/platform-d
 export class SigninComponent implements OnInit {
 
   loginForm: FormGroup;
-  msg: string;
   @ViewChild('firstInput') firstInput: ElementRef<HTMLInputElement>;
 
   constructor(
     private _fb: FormBuilder,
     private _authService: AuthService,
     private _router: Router,
-    private _platformDetectorService: PlatformDetectorService
+    private _platformDetectorService: PlatformDetectorService,
+    private _notifyService: NotifyService,
   ) { }
 
   ngOnInit() {
@@ -45,13 +46,9 @@ export class SigninComponent implements OnInit {
           this._platformDetectorService.isPlatformBrowser() && this.firstInput.nativeElement.focus();
 
           try {
-            this.msg = err.error.message;
+            this._notifyService.danger(err.error.message);
           } catch (e) {
-            this.msg = 'Login ou Senha inválidos!'
-          } finally {
-            setTimeout(() => {
-              this.msg = '';
-            }, 5000);
+            this._notifyService.danger('Login ou Senha inválidos!');
           }
         }
       );

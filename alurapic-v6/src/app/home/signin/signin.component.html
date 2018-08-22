@@ -2,10 +2,6 @@
 
 <form [formGroup]="loginForm" class="form mt-4" (submit)="login()">
 
-  <app-valert *ngIf="msg">
-    {{ msg }}
-  </app-valert>
-
   <div class="form-group">
     <input type="text" formControlName="userName" #firstInput class="form-control" placeholder="User name" autofocus>
 
