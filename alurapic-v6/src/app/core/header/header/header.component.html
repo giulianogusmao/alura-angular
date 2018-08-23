@@ -1,8 +1,17 @@
 <header class="fixed-top">
   <nav class="navbar navbar-light bg-white">
     <a [routerLink]="['']" class="navbar-brand">
+      <i showIfLogged tabindex="0" (keyup.space)="menu.toggle()" class="fa fa-bars mr-2" (click)="menu.toggle()" title="Abrir menu principal"></i>
       Alurapic
     </a>
+
+    <app-menu #menu showIfLogged>
+      <ul class="list-unstyled">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/photo', 'add']" title="" (click)="menu.toggle()">Photo upload</a>
+        </li>
+      </ul>
+    </app-menu>
 
     <div *ngIf="(user$ | async) as user; else login">
       <i class="fa fa-user-circle"></i>

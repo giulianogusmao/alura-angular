@@ -7,6 +7,8 @@ import { UserService } from "../../../core/user/user.service";
 })
 export class ShowIfLoggedDirective implements OnInit {
 
+  private currentDisplay: string;
+
   constructor(
     private element: ElementRef<any>,
     private renderer: Renderer,
@@ -14,8 +16,22 @@ export class ShowIfLoggedDirective implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // esconde elemento caso o usuário não esteja logado
-    !this.userService.isLogged()
-      && this.renderer.setElementStyle(this.element.nativeElement, 'display', 'none');
+    this.refreshCurrentDisplay();
+
+    this.userService.getUser().subscribe(user => {
+      if (user) {
+        this.renderer.setElementStyle(this.element.nativeElement, 'display', this.currentDisplay);
+      } else {
+        this.refreshCurrentDisplay();
+        // esconde elemento caso o usuário não esteja logado
+        this.renderer.setElementStyle(this.element.nativeElement, 'display', 'none');
+      }
+    });
+
+  }
+
+  refreshCurrentDisplay() {
+    // captura o display na inicialização do componente
+    this.currentDisplay = getComputedStyle(this.element.nativeElement).display;
   }
 }
