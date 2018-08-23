@@ -2,8 +2,9 @@
   position: relative;
   display: block;
   margin: 0;
-  background: linear-gradient(270deg, #ff0000, #ffa500, #008000, #0000ff, #4b0082);
-  animation: progress 1s linear infinite;
+  background: #5aaaff;
+  animation: progress .8s linear infinite;
+  animation-direction: alternate;
   height: 0.2em;
 }
 
@@ -11,25 +12,18 @@
   0% {
     left: 0;
     width: 0;
-    opacity: 0;
   }
   30% {
     left: 10%;
     width: 40%;
-    opacity: .6;
-  }
-  50% {
-    opacity: 1;
   }
   70% {
     left: 50%;
     width: 40%;
-    opacity: .6;
   }
   100% {
     left: 100%;
     width: 0;
-    opacity: 0;
   }
 }
 
