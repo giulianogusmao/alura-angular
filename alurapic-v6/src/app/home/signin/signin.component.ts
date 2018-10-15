@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../../core/auth/auth.service';
 import { PlatformDetectorService } from '../../core/platform-detector/platform-detector.service';
@@ -11,6 +11,7 @@ import { NotifyService } from '../../shared/components/notify/notify.service';
 })
 export class SigninComponent implements OnInit {
 
+  fromUrl: string;
   loginForm: FormGroup;
   @ViewChild('firstInput') firstInput: ElementRef<HTMLInputElement>;
 
@@ -20,9 +21,14 @@ export class SigninComponent implements OnInit {
     private _router: Router,
     private _platformDetectorService: PlatformDetectorService,
     private _notifyService: NotifyService,
+    private _activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    // get url que estava tentando acessar
+    this._activatedRoute.queryParams.subscribe(params => this.fromUrl = params['fromUrl']);
+
+    // create form
     this.loginForm = this._fb.group({
       userName: ['', Validators.required],
       password: ['', Validators.required]
@@ -39,7 +45,11 @@ export class SigninComponent implements OnInit {
     this._authService
       .authenticate(userName, password)
       .subscribe(
-        () => this._router.navigate(['user', userName]),
+        () => {
+          this.fromUrl
+            ? this._router.navigateByUrl(this.fromUrl)
+            : this._router.navigate(['user', userName]);
+        },
         (err) => {
           console.error(err);
           this.loginForm.reset();
