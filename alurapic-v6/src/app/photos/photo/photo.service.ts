@@ -24,7 +24,7 @@ export class PhotoService {
       .append('page', page.toString());
 
     return this._http
-      .get<Photo[]>(`${Helper.api}/${userName}/photosxx`, { params });
+      .get<Photo[]>(`${Helper.api}/${userName}/photos`, { params });
   }
 
   upload(description: string, allowComments: boolean, file: File) {

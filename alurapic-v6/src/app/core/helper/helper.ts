@@ -9,4 +9,8 @@ export class Helper {
   static get api() {
     return environment.ApiUrl;
   }
+
+  static get apiLog() {
+    return environment.ServerLog;
+  }
 }
