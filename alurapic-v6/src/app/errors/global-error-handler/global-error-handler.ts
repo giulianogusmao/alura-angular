@@ -54,8 +54,8 @@ export class GlobalErrorHandler implements ErrorHandler {
             err => {
               console.error(err);
               console.log('Fail to send log to server');
-              console.error(logError);
-            }
+            },
+            () => console.error(logError)
           );
       });
   }
